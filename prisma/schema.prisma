@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id         Int       @id @default(autoincrement())
-  username   String
+  name       String
   email      String    @unique
   password   String
   created_at DateTime  @default(now())
@@ -22,6 +22,8 @@ model User {
   following  Follow[]  @relation("following")
   likes      Like[]
   comments   Comment[]
+
+  @@map("users")
 }
 
 model Board {
@@ -33,6 +35,8 @@ model Board {
   user       User      @relation(fields: [user_id], references: [id])
   likes      Like[]
   comments   Comment[]
+
+  @@map("boards")
 }
 
 model Comment {
@@ -44,6 +48,8 @@ model Comment {
   updated_at DateTime @updatedAt
   post       Board    @relation(fields: [post_id], references: [id])
   user       User     @relation(fields: [user_id], references: [id])
+
+  @@map("comments")
 }
 
 model Follow {
@@ -53,6 +59,8 @@ model Follow {
   created_at    DateTime @default(now())
   follower      User     @relation("follower", fields: [follower_id], references: [id])
   following     User     @relation("following", fields: [following_id], references: [id])
+
+  @@map("follews")
 }
 
 model Like {
@@ -62,4 +70,6 @@ model Like {
   created_at DateTime @default(now())
   user       User     @relation(fields: [user_id], references: [id])
   post       Board    @relation(fields: [post_id], references: [id])
+
+  @@map("likes")
 }
