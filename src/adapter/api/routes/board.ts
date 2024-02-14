@@ -9,7 +9,6 @@ const usecase = new BoardUseCase(repository)
 const board = new BoardController(usecase);
 
 apiRouter.get("/boards", board.getBoards);
-// apiRouter.get("/boards", usecase.all);
 apiRouter.post("/boards", board.createBoard);
 
 module.exports = apiRouter;
