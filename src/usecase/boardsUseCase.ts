@@ -9,10 +9,8 @@ export class BoardUseCase implements BoardUseCaseInterface {
         this.boardsRepository = boardsRepository;
     }
 
-    // all = async(_req: Request, res: Response): Promise<void> => {
     all = async(): Promise<Board[] | undefined> => {
         return await this.boardsRepository.all()
-        // res.status(200).json(boards)
     }
 
     create = async(content: string, userId:number): Promise<Board | undefined> => {

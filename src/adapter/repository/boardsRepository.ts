@@ -4,12 +4,7 @@ import type { BoardsRepositoryInterface } from "./interface/boardsRepositoryIf";
 
 export class BoardRepository implements BoardsRepositoryInterface {
     all = async(): Promise<Board[] | undefined> => {
-        try {
-            console.log('repositoru')
-            return await prismaContext.board.findMany()
-        } catch (err: any) {
-            console.log('err', err.message)
-        }
+        return await prismaContext.board.findMany()
     }
 
     create = async(content: string, userId: number): Promise<Board> => {

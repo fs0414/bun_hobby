@@ -4,12 +4,16 @@ import { prismaContext } from "../../infrastructure/database/prismaContext";
 
 export class UserReposiotry implements UserRepositoryInterface {
     create = async(name: string, email: string, password: string): Promise<User | undefined> => {
-        return await prismaContext.user.create({
-            data: {
-                name: name,
-                email: email,
-                password: password
-            }
-        })
+        try {
+            return await prismaContext.user.create({
+                data: {
+                    name: name,
+                    email: email,
+                    password: password
+                }
+            })
+        } catch(err: any) {
+            throw new Error('test error');
+        }
     }
 }
