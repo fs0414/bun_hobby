@@ -6,9 +6,11 @@ const { UserReposiotry } = require("../../repository/userRepository");
 const express = require("express");
 const apiRouter = express.Router();
 
-const repository = new UserReposiotry();
-const usecase = new UserUseCase(repository)
-const user = new UserController(usecase)
+const user = new UserController(
+    new UserUseCase(
+        new UserReposiotry()
+    )
+)
 
 apiRouter.get("/users", user.all);
 apiRouter.post("/signup", user.signin);
