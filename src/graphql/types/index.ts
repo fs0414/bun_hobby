@@ -1,2 +1,1 @@
-export * from "./hello"
-export * from "./board"
+export * from "../queries/index"

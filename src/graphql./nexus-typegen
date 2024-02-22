@@ -58,7 +58,6 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     boards: Array<NexusGenRootTypes['Board'] | null>; // [Board]!
-    hello: string; // String!
   }
 }
 
@@ -73,7 +72,6 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     boards: 'Board'
-    hello: 'String'
   }
 }
 
