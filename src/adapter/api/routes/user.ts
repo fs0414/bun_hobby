@@ -1,18 +1,17 @@
-// import { UserController } from "../controller/userController";
 const { UserController } = require("../controller/userController");
-const { UserUseCase } = require("../../../usecase/userUseCase");
-const { UserReposiotry } = require("../../repository/userRepository");
+const { UserUseCase } = require("../../../applicatopn/usecase/userUseCase")
+const { UserRepository } = require("../../../infrastructure/repository/userRepository");
 
 const express = require("express");
 const apiRouter = express.Router();
 
 const user = new UserController(
     new UserUseCase(
-        new UserReposiotry()
+        new UserRepository()
     )
 )
 
 apiRouter.get("/users", user.all);
-apiRouter.post("/signup", user.signin);
+apiRouter.post("/signup", user.signup);
 
 module.exports = apiRouter

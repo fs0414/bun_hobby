@@ -28,6 +28,9 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthPayload: { // root type
+    token: string; // String!
+  }
   Board: { // root type
     content: string; // String!
     id: number; // Int!
@@ -35,6 +38,12 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Query: {};
+  User: { // root type
+    email: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    password: string; // String!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -48,6 +57,9 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    token: string; // String!
+  }
   Board: { // field return type
     content: string; // String!
     id: number; // Int!
@@ -55,13 +67,25 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createBoard: NexusGenRootTypes['Board']; // Board!
+    signin: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    signup: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
     boards: Array<NexusGenRootTypes['Board'] | null>; // [Board]!
+    users: Array<NexusGenRootTypes['User'] | null>; // [User]!
+  }
+  User: { // field return type
+    email: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    password: string; // String!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthPayload: { // field return type name
+    token: 'String'
+  }
   Board: { // field return type name
     content: 'String'
     id: 'Int'
@@ -69,9 +93,18 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     createBoard: 'Board'
+    signin: 'AuthPayload'
+    signup: 'User'
   }
   Query: { // field return type name
     boards: 'Board'
+    users: 'User'
+  }
+  User: { // field return type name
+    email: 'String'
+    id: 'Int'
+    name: 'String'
+    password: 'String'
   }
 }
 
@@ -80,6 +113,15 @@ export interface NexusGenArgTypes {
     createBoard: { // args
       content?: string | null; // String
       user_id?: number | null; // Int
+    }
+    signin: { // args
+      email: string; // String!
+      password: string; // String!
+    }
+    signup: { // args
+      email?: string | null; // String
+      name?: string | null; // String
+      password?: string | null; // String
     }
   }
 }

@@ -2,6 +2,10 @@
 ### Do not make changes to this file directly
 
 
+type AuthPayload {
+  token: String!
+}
+
 type Board {
   content: String!
   id: Int!
@@ -10,8 +14,18 @@ type Board {
 
 type Mutation {
   createBoard(content: String, user_id: Int): Board!
+  signin(email: String!, password: String!): AuthPayload!
+  signup(email: String, name: String, password: String): User!
 }
 
 type Query {
   boards: [Board]!
+  users: [User]!
+}
+
+type User {
+  email: String!
+  id: Int!
+  name: String!
+  password: String!
 }

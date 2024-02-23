@@ -1,5 +1,5 @@
 import { type Request, type Response } from "express";
-import type { BoardUseCaseInterface } from "../../../usecase/interface/boardsUseCaseIf";
+import type { BoardUseCaseInterface } from "../../../applicatopn/usecase/interface/boardsUseCaseIf";
 
 export class BoardController {
     private boardsUseCase: BoardUseCaseInterface;

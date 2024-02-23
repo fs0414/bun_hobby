@@ -3,12 +3,6 @@
  * Do not make changes to this file directly
  */
 
-
-
-
-
-
-
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }

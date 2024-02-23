@@ -1,5 +1,5 @@
 import type { Board } from "@prisma/client";
-import { prismaContext } from "../../infrastructure/database/prismaContext";
+import { prismaContext } from "../database/prismaContext";
 import type { BoardsRepositoryInterface } from "./interface/boardsRepositoryIf";
 
 export class BoardRepository implements BoardsRepositoryInterface {

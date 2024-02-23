@@ -1,9 +1,7 @@
 import express, { 
   type Application, 
   type Request, 
-  type Response, 
-  type ErrorRequestHandler, 
-  type NextFunction 
+  type Response,
 } from "express";
 import cors from "cors";
 import { graphqlHTTP } from "express-graphql";

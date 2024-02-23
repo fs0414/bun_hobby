@@ -1,5 +1,5 @@
 import { test, expect, jest } from "bun:test";
-import type { BoardUseCaseInterface } from "../../../usecase/interface/boardsUseCaseIf";
+import type { BoardUseCaseInterface } from "../../../applicatopn/usecase/interface/boardsUseCaseIf";
 
 export const mockBoardUseCase : BoardUseCaseInterface = {
     all: jest.fn().mockResolvedValue(

@@ -1,8 +1,8 @@
 import { extendType } from "nexus";
-import { Board } from "../../types";
+import { Board } from "../../types/board";
 import { prismaContext } from "../../../infrastructure/database/prismaContext";
 
-export const BoardQuery = extendType({
+export const GetBoardsQuery = extendType({
     type: 'Query',
     definition(t) {
       t.nonNull.list.field('boards', {
@@ -12,4 +12,4 @@ export const BoardQuery = extendType({
         },
       });
     },
-  });
+});

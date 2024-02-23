@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { UserUseCaseInterface } from "../../../usecase/interface/userUseCaseIf";
+import type { UserUseCaseInterface } from "../../../applicatopn/usecase/interface/userUseCaseIf";
 import { prismaContext } from "../../../infrastructure/database/prismaContext";
 
 export class UserController {
@@ -15,7 +15,7 @@ export class UserController {
         res.status(200).json(users);
     }
 
-    signin = async(req: Request, res: Response) => {
+    signup = async(req: Request, res: Response) => {
         const { name, email, password } = req.body;
         const user = await this.userUseCase.create(name, email, password)
         console.log('controller usre :', user)

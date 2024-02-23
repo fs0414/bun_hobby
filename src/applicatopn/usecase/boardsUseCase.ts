@@ -1,4 +1,4 @@
-import type { BoardsRepositoryInterface } from "../adapter/repository/interface/boardsRepositoryIf";
+import type { BoardsRepositoryInterface } from "../../infrastructure/repository/interface/boardsRepositoryIf";
 import type { BoardUseCaseInterface } from "./interface/boardsUseCaseIf";
 import type { Board } from "@prisma/client";
 
