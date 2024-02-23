@@ -1,6 +1,6 @@
-import { extendType, nonNull, stringArg } from "nexus";
-import { AuthPayload } from "../../types/user";
+import { extendType, nonNull, objectType, stringArg } from "nexus";
 import { UserUseCaseFactory } from "../../factory/userFactory";
+import { AuthPayload } from "../../types/user";
 
 export const SignInMutation = extendType({
     type: "Mutation",

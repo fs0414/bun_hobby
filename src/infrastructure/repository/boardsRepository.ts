@@ -15,4 +15,15 @@ export class BoardRepository implements BoardsRepositoryInterface {
             }
         })
     }
+
+    update = async(id: number, content: string): Promise<Board | undefined> => {
+        return await prismaContext.board.update({
+            where: {
+                id: id
+            },
+            data: {
+                content: content
+            }
+        })
+    }
 }

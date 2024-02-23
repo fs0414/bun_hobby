@@ -16,4 +16,8 @@ export class BoardUseCase implements BoardUseCaseInterface {
     create = async(content: string, userId:number): Promise<Board | undefined> => {
         return await this.boardsRepository.create(content, userId)
     }
+
+    update = async(id: number, content: string): Promise<Board | undefined> => {
+        return await this.boardsRepository.update(id, content)
+    }
 }

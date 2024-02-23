@@ -1,6 +1,6 @@
 import { extendType } from "nexus";
+import { BoardUseCaseFactory } from "../../factory/boardFactory";
 import { Board } from "../../types/board";
-import { prismaContext } from "../../../infrastructure/database/prismaContext";
 
 export const GetBoardsQuery = extendType({
     type: 'Query',
@@ -8,7 +8,9 @@ export const GetBoardsQuery = extendType({
       t.nonNull.list.field('boards', {
         type: Board,
         resolve: async () => {
-          return await prismaContext.board.findMany();
+            const usecase = BoardUseCaseFactory.createBoardUseCase();
+            const boards = await usecase.all();
+            return boards;
         },
       });
     },

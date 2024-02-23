@@ -1,5 +1,4 @@
 import { extendType } from "nexus";
-import { prismaContext } from "../../../infrastructure/database/prismaContext";
 import { User } from "../../types/user";
 import { UserUseCaseFactory } from "../../factory/userFactory";
 
