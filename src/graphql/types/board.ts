@@ -1,5 +1,4 @@
-import { objectType, extendType } from "nexus";
-import { prismaContext } from "../../infrastructure/database/prismaContext";
+import { objectType } from "nexus";
 
 export const Board = objectType({
     name: "Board",

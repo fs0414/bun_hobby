@@ -13,6 +13,10 @@ export class BoardUseCase implements BoardUseCaseInterface {
         return await this.boardsRepository.all()
     }
 
+    find = async(id: number): Promise<Board | null> => {
+        return await this.boardsRepository.find(id)
+    }
+
     create = async(content: string, userId:number): Promise<Board | undefined> => {
         return await this.boardsRepository.create(content, userId)
     }
