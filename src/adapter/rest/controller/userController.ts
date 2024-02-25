@@ -10,7 +10,6 @@ export class UserController {
     }
 
     all = async(_req: Response, res: Response) => {
-        console.log('users')
         const users = await prismaContext.user.findMany()
         res.status(200).json(users);
     }
@@ -18,7 +17,6 @@ export class UserController {
     signup = async(req: Request, res: Response) => {
         const { name, email, password } = req.body;
         const user = await this.userUseCase.signup(name, email, password)
-        console.log('controller usre :', user)
         res.status(201).json(user);
     }
 }
