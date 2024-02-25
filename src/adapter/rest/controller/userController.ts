@@ -20,7 +20,7 @@ export class UserController {
             const user = await this.userUseCase.signup(name, email, password)
             res.status(201).json(user);
         } catch(error: unknown) {
-            next(error);d
+            next(error);
         }
     }
 }
