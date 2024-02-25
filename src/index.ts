@@ -1,30 +1,29 @@
 import express, { 
-  type Application, 
-  type NextFunction, 
+  type Application,
+  type NextFunction,
   type Request, 
   type Response,
 } from "express";
 import cors from "cors";
-import { graphqlHTTP } from "express-graphql";
-import { schema } from "./graphql/schema";
+import { graphiqlRouter } from "./graphql/adapter/router";
+import { errorHandler } from "./applicatopn/handler/middleware/errorHandler";
 
 export const app: Application = express();
 const port = 8000;
 
+// middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+// routes
 app.use("", require("./adapter/rest/index"));
+app.use("/graphql", graphiqlRouter);
 
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schema,
-    graphiql: true
-  })
-)
+// error handler
+app.use(errorHandler);
 
-
+// server
 app.get("/", (_req: Request, res: Response) => {
   res.send("Hello World!");
 });
@@ -32,13 +31,3 @@ app.get("/", (_req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
 });
-
-app.use((
-  err: Error,
-  _req: Request,
-  res: Response,
-  _next: NextFunction) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-  }
-);

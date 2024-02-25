@@ -11,9 +11,10 @@ export const GetBoardQuery = extendType({
             id: nonNull(intArg()),
         },
         resolve: async (_, { id }) => {
-                const usecase = BoardUseCaseFactory.createBoardUseCase();
-                const board = await usecase.find(id);
-                return board;
+            // console.log(__dirname)
+            const usecase = BoardUseCaseFactory.createBoardUseCase();
+            const board = await usecase.find(id);
+            return board;
         },
         });
     },

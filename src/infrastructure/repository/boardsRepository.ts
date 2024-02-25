@@ -10,28 +10,26 @@ export class BoardRepository implements BoardsRepositoryInterface {
     }
     
     find = async(id: number): Promise<Board | null> => {
-            const cacheKey = `board:${id}`
-            const cacheRecode = await redisClient.get(cacheKey)
-    
-            if (cacheRecode) {
-                console.log('board find cache hit')
-                return JSON.parse(cacheRecode)
+        const cacheKey = `board:${id}`
+        const cacheRecode = await redisClient.get(cacheKey)
+
+        if (cacheRecode) {
+            console.log('board find cache hit')
+            return JSON.parse(cacheRecode)
+        }
+
+        const board = await prismaContext.board.findUnique({
+            where: {
+                id: id
             }
-    
-            const board = await prismaContext.board.findUnique({
-                where: {
-                    id: id
-                }
-            })
-    
-            if (board) {
-                console.log('board find cache add')
-                await redisClient.set(cacheKey, JSON.stringify(board))
-            } else {
-                throw new Error('board not found')
-            }
-    
-            return board;
+        })
+
+        if (board) {
+            console.log('board find cache add')
+            await redisClient.set(cacheKey, JSON.stringify(board))
+        } 
+
+        return board;
     }
 
     create = async(content: string, userId: number): Promise<Board | undefined> => {

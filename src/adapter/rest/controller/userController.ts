@@ -1,4 +1,4 @@
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import type { UserUseCaseInterface } from "../../../applicatopn/usecase/interface/userUseCaseIf";
 import { prismaContext } from "../../../infrastructure/database/prismaContext";
 
@@ -14,9 +14,13 @@ export class UserController {
         res.status(200).json(users);
     }
 
-    signup = async(req: Request, res: Response) => {
-        const { name, email, password } = req.body;
-        const user = await this.userUseCase.signup(name, email, password)
-        res.status(201).json(user);
+    signup = async(req: Request, res: Response, next: NextFunction) => {
+        try {
+            const { name, email, password } = req.body;
+            const user = await this.userUseCase.signup(name, email, password)
+            res.status(201).json(user);
+        } catch(error: unknown) {
+            next(error);d
+        }
     }
 }

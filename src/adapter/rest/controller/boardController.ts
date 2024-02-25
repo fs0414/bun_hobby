@@ -1,4 +1,4 @@
-import { type Request, type Response } from "express";
+import { type NextFunction, type Request, type Response } from "express";
 import type { BoardUseCaseInterface } from "../../../applicatopn/usecase/interface/boardsUseCaseIf";
 
 export class BoardController {
@@ -13,14 +13,15 @@ export class BoardController {
         res.status(200).json(boards);
     }
 
-    createBoard = async(req: Request, res: Response) => {
+    createBoard = async(req: Request, res: Response, next: NextFunction) => {
         try {
             const { content, userId } = req.body;
             const board = await this.boardsUseCase.create(content, userId);
-            res.status(201).json(board);
-        } catch(err: any) {
-            console.log('err', err.message)
+            res.status(201).json({
+                "board": board
+            });
+        } catch(error: unknown) {
+            next(error);
         }
-        
     }
 }
