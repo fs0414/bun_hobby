@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { expect, jest, describe, it } from "bun:test";
-import { BoardController } from "../../../adapter/api/controller/boardController";
+import { BoardController } from "../../../adapter/rest/controller/boardController";
 import { mockBoardUseCase } from "./boardUseCaseMock.test";
 
 const mockReq: any = {

@@ -17,7 +17,7 @@ export class UserController {
 
     signup = async(req: Request, res: Response) => {
         const { name, email, password } = req.body;
-        const user = await this.userUseCase.create(name, email, password)
+        const user = await this.userUseCase.signup(name, email, password)
         console.log('controller usre :', user)
         res.status(201).json(user);
     }

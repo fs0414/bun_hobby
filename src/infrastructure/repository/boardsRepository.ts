@@ -2,6 +2,7 @@ import type { Board } from "@prisma/client";
 import { prismaContext } from "../database/prismaContext";
 import type { BoardsRepositoryInterface } from "./interface/boardsRepositoryIf";
 import { redisClient } from "../redis/redisClient";
+// import { Prisma } from '@prisma/client'
 
 export class BoardRepository implements BoardsRepositoryInterface {
     all = async(): Promise<Board[] | undefined> => {
@@ -9,29 +10,31 @@ export class BoardRepository implements BoardsRepositoryInterface {
     }
     
     find = async(id: number): Promise<Board | null> => {
-        const cacheKey = `board:${id}`
-        const cacheRecode = await redisClient.get(cacheKey)
-
-        if (cacheRecode) {
-            console.log('board find cache hit')
-            return JSON.parse(cacheRecode)
-        }
-
-        const board = await prismaContext.board.findUnique({
-            where: {
-                id: id
+            const cacheKey = `board:${id}`
+            const cacheRecode = await redisClient.get(cacheKey)
+    
+            if (cacheRecode) {
+                console.log('board find cache hit')
+                return JSON.parse(cacheRecode)
             }
-        })
-
-        if (board) {
-            console.log('board find cache add')
-            await redisClient.set(cacheKey, JSON.stringify(board))
-        }
-
-        return board;
+    
+            const board = await prismaContext.board.findUnique({
+                where: {
+                    id: id
+                }
+            })
+    
+            if (board) {
+                console.log('board find cache add')
+                await redisClient.set(cacheKey, JSON.stringify(board))
+            } else {
+                throw new Error('board not found')
+            }
+    
+            return board;
     }
 
-    create = async(content: string, userId: number): Promise<Board> => {
+    create = async(content: string, userId: number): Promise<Board | undefined> => {
         return await prismaContext.board.create({
             data: {
                 content: content,
