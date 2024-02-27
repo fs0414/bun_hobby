@@ -10,7 +10,7 @@ export const GetBoardsQuery = extendType({
         resolve: async () => {
             const usecase = BoardUseCaseFactory.createBoardUseCase();
             const boards = await usecase.all();
-            return boards;
+            return boards || [];
         },
       });
     },

@@ -1,5 +1,5 @@
-import { extendType } from "nexus";
-import { User } from "../../types/user";
+import { arg, extendType, nonNull } from "nexus";
+import { Role, User } from "../../types/user";
 import { UserUseCaseFactory } from "../../factory/userFactory";
 
 export const SignupMutation = extendType({
@@ -8,15 +8,17 @@ export const SignupMutation = extendType({
       t.nonNull.field('signup', {
         type: User,
         args: {
-          name: 'String',
-          email: 'String',
-          password: 'String'
+          name: nonNull('String'),
+          email: nonNull('String'),
+          password: nonNull('String'),
+          role: nonNull(arg({ type: Role })),
         },
-        resolve: async (_parent, { name, email, password }) => {
+        resolve: async (_parent, { name, email, password, role }) => {
             try {
                 const usecase = UserUseCaseFactory.createUserUseCase()
-                const user = await usecase.signup(name, email, password)
-                return user
+                return await usecase.signup(
+                  name, email, password, role
+                )
             } catch (error: ErrnoException | any) {
                 throw new Error(error.message)
             }

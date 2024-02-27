@@ -1,4 +1,4 @@
-import { objectType } from "nexus";
+import { enumType, objectType } from "nexus";
 
 export const User = objectType({
     name: "User",
@@ -7,7 +7,13 @@ export const User = objectType({
         t.nonNull.string("name");
         t.nonNull.string("email");
         t.nonNull.string("password");
+        t.nonNull.field("role", { type: "Role" });
     },
+});
+
+export const Role = enumType({
+    name: "Role",
+    members: ["USER", "ADMIN"],
 });
 
 export const AuthPayload = objectType({

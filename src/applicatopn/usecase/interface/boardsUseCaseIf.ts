@@ -1,11 +1,11 @@
 import type { Board } from "@prisma/client";
 
 export interface BoardUseCaseInterface {
-    all(): Promise<Board[] | undefined>;
+    all(): Promise<Board[]>;
     
-    find(id: number): Promise<Board | null>;
+    find(id: number): Promise<Board>;
 
-    create(content: string, userId:number): Promise<Board | undefined>;
+    create(content: string, userId:number): Promise<Board>;
 
-    update(id: number, content: string): Promise<Board | undefined>;
+    update(id: number, content: string): Promise<Board>;
 }

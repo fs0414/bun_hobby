@@ -1,4 +1,4 @@
-import { extendType } from "nexus";
+import { extendType, intArg, nonNull } from "nexus";
 import { Board } from "../../types/board";
 import { BoardUseCaseFactory } from "../../factory/boardFactory";
 
@@ -8,8 +8,8 @@ export const CreateBoardMutation = extendType({
     t.nonNull.field('createBoard', {
       type: Board,
       args: {
-        content: 'String',
-        user_id: 'Int'
+        content: nonNull('String'),
+        user_id: nonNull(intArg()),
       },
       resolve: async (_parent, { content, user_id }) => {
         const usecase = BoardUseCaseFactory.createBoardUseCase();

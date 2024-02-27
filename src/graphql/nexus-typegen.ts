@@ -3,6 +3,12 @@
  * Do not make changes to this file directly
  */
 
+
+
+
+
+
+
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
@@ -11,6 +17,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Role: "ADMIN" | "USER"
 }
 
 export interface NexusGenScalars {
@@ -22,7 +29,23 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthPayload: { // root type
+    token: string; // String!
+  }
+  Board: { // root type
+    content: string; // String!
+    id: number; // Int!
+    user_id: number; // Int!
+  }
+  Mutation: {};
   Query: {};
+  User: { // root type
+    email: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    password: string; // String!
+    role: NexusGenEnums['Role']; // Role!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -33,21 +56,92 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    token: string; // String!
+  }
+  Board: { // field return type
+    content: string; // String!
+    id: number; // Int!
+    user_id: number; // Int!
+  }
+  Mutation: { // field return type
+    createBoard: NexusGenRootTypes['Board']; // Board!
+    signin: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    signup: NexusGenRootTypes['User']; // User!
+    updateBoard: NexusGenRootTypes['Board']; // Board!
+  }
   Query: { // field return type
-    hello: string; // String!
+    board: NexusGenRootTypes['Board']; // Board!
+    boards: Array<NexusGenRootTypes['Board'] | null>; // [Board]!
+    users: Array<NexusGenRootTypes['User'] | null>; // [User]!
+  }
+  User: { // field return type
+    email: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    password: string; // String!
+    role: NexusGenEnums['Role']; // Role!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthPayload: { // field return type name
+    token: 'String'
+  }
+  Board: { // field return type name
+    content: 'String'
+    id: 'Int'
+    user_id: 'Int'
+  }
+  Mutation: { // field return type name
+    createBoard: 'Board'
+    signin: 'AuthPayload'
+    signup: 'User'
+    updateBoard: 'Board'
+  }
   Query: { // field return type name
-    hello: 'String'
+    board: 'Board'
+    boards: 'Board'
+    users: 'User'
+  }
+  User: { // field return type name
+    email: 'String'
+    id: 'Int'
+    name: 'String'
+    password: 'String'
+    role: 'Role'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createBoard: { // args
+      content: string; // String!
+      user_id: number; // Int!
+    }
+    signin: { // args
+      email: string; // String!
+      password: string; // String!
+    }
+    signup: { // args
+      email: string; // String!
+      name: string; // String!
+      password: string; // String!
+      role: NexusGenEnums['Role']; // Role!
+    }
+    updateBoard: { // args
+      content: string; // String!
+      id: number; // Int!
+    }
+  }
+  Query: {
+    board: { // args
+      id: number; // Int!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -60,7 +154,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

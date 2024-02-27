@@ -9,19 +9,21 @@ export class BoardUseCase implements BoardUseCaseInterface {
         this.boardsRepository = boardsRepository;
     }
 
-    all = async(): Promise<Board[] | undefined> => {
+    all = async(): Promise<Board[]> => {
         return await this.boardsRepository.all()
     }
 
-    find = async(id: number): Promise<Board | null> => {
-        return await this.boardsRepository.find(id)
+    find = async(id: number): Promise<Board> => {
+        const board = await this.boardsRepository.find(id)
+        console.log("board", board)
+        return board
     }
 
-    create = async(content: string, userId:number): Promise<Board | undefined> => {
+    create = async(content: string, userId:number): Promise<Board> => {
         return await this.boardsRepository.create(content, userId)
     }
 
-    update = async(id: number, content: string): Promise<Board | undefined> => {
+    update = async(id: number, content: string): Promise<Board> => {
         return await this.boardsRepository.update(id, content)
     }
 }

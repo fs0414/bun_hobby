@@ -2,14 +2,13 @@ import type { Board } from "@prisma/client";
 import { prismaContext } from "../database/prismaContext";
 import type { BoardsRepositoryInterface } from "./interface/boardsRepositoryIf";
 import { redisClient } from "../redis/redisClient";
-// import { Prisma } from '@prisma/client'
 
 export class BoardRepository implements BoardsRepositoryInterface {
-    all = async(): Promise<Board[] | undefined> => {
+    all = async(): Promise<Board[]> => {
         return await prismaContext.board.findMany()
     }
     
-    find = async(id: number): Promise<Board | null> => {
+    find = async(id: number): Promise<Board> => {
         const cacheKey = `board:${id}`
         const cacheRecode = await redisClient.get(cacheKey)
 
@@ -27,12 +26,14 @@ export class BoardRepository implements BoardsRepositoryInterface {
         if (board) {
             console.log('board find cache add')
             await redisClient.set(cacheKey, JSON.stringify(board))
-        } 
+        } else {
+            throw new Error()
+        }
 
         return board;
     }
 
-    create = async(content: string, userId: number): Promise<Board | undefined> => {
+    create = async(content: string, userId: number): Promise<Board> => {
         return await prismaContext.board.create({
             data: {
                 content: content,
@@ -41,7 +42,7 @@ export class BoardRepository implements BoardsRepositoryInterface {
         })
     }
 
-    update = async(id: number, content: string): Promise<Board | undefined> => {
+    update = async(id: number, content: string): Promise<Board> => {
         return await prismaContext.board.update({
             where: {
                 id: id

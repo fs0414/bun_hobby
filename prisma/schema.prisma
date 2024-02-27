@@ -85,7 +85,6 @@ model BankAccount {
   @@map("bank_accounts")
 }
 
-
 enum Role {
   USER
   ADMIN

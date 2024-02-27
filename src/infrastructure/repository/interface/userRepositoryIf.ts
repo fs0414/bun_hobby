@@ -1,7 +1,7 @@
-import type { User } from "@prisma/client";
+import type { Role, User } from "@prisma/client";
 
 export interface UserRepositoryInterface {
-    create(name: string, email: string, password: string): Promise<User | undefined>
+    create(name: string, email: string, password: string, role: Role): Promise<User>
 
-    find(email: string, password: string): Promise<User | null>
+    find(email: string, password: string): Promise<User>
 }
