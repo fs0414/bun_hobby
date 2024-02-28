@@ -1,4 +1,5 @@
 import { enumType, objectType } from "nexus";
+import { Board } from "./board";
 
 export const User = objectType({
     name: "User",
@@ -8,6 +9,7 @@ export const User = objectType({
         t.nonNull.string("email");
         t.nonNull.string("password");
         t.nonNull.field("role", { type: "Role" });
+        t.list.field("boards", { type: Board });
     },
 });
 

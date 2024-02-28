@@ -15,7 +15,6 @@ export class BoardUseCase implements BoardUseCaseInterface {
 
     find = async(id: number): Promise<Board> => {
         const board = await this.boardsRepository.find(id)
-        console.log("board", board)
         return board
     }
 

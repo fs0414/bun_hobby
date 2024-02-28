@@ -38,13 +38,6 @@ export interface NexusGenObjects {
     user_id: number; // Int!
   }
   Mutation: {};
-  PersonalBankAccount: { // root type
-    account_number: string; // String!
-    balance: number; // Int!
-    id: number; // Int!
-    is_active: boolean; // Boolean!
-    user_id: number; // Int!
-  }
   Query: {};
   User: { // root type
     boards?: Array<NexusGenRootTypes['Board'] | null> | null; // [Board]
@@ -77,23 +70,14 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createBoard: NexusGenRootTypes['Board']; // Board!
-    createPersonalBankAccount: NexusGenRootTypes['PersonalBankAccount']; // PersonalBankAccount!
     signin: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     signup: NexusGenRootTypes['User']; // User!
     updateBoard: NexusGenRootTypes['Board']; // Board!
-  }
-  PersonalBankAccount: { // field return type
-    account_number: string; // String!
-    balance: number; // Int!
-    id: number; // Int!
-    is_active: boolean; // Boolean!
-    user_id: number; // Int!
   }
   Query: { // field return type
     board: NexusGenRootTypes['Board']; // Board!
     boards: Array<NexusGenRootTypes['Board'] | null>; // [Board]!
     hello: string; // String!
-    personalBankAccount: NexusGenRootTypes['PersonalBankAccount']; // PersonalBankAccount!
     user: NexusGenRootTypes['User']; // User!
     users: Array<NexusGenRootTypes['User'] | null>; // [User]!
   }
@@ -118,23 +102,14 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     createBoard: 'Board'
-    createPersonalBankAccount: 'PersonalBankAccount'
     signin: 'AuthPayload'
     signup: 'User'
     updateBoard: 'Board'
-  }
-  PersonalBankAccount: { // field return type name
-    account_number: 'String'
-    balance: 'Int'
-    id: 'Int'
-    is_active: 'Boolean'
-    user_id: 'Int'
   }
   Query: { // field return type name
     board: 'Board'
     boards: 'Board'
     hello: 'String'
-    personalBankAccount: 'PersonalBankAccount'
     user: 'User'
     users: 'User'
   }
@@ -152,12 +127,6 @@ export interface NexusGenArgTypes {
   Mutation: {
     createBoard: { // args
       content: string; // String!
-      user_id: number; // Int!
-    }
-    createPersonalBankAccount: { // args
-      account_number: string; // String!
-      balance?: number | null; // Int
-      is_active?: boolean | null; // Boolean
       user_id: number; // Int!
     }
     signin: { // args
@@ -178,10 +147,6 @@ export interface NexusGenArgTypes {
   Query: {
     board: { // args
       id: number; // Int!
-    }
-    personalBankAccount: { // args
-      id: number; // Int!
-      user_id: number; // Int!
     }
     user: { // args
       id: number; // Int!

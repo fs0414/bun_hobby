@@ -10,8 +10,8 @@ export const GetBoardQuery = extendType({
         args: {
             id: nonNull(intArg()),
         },
-        resolve: async (_, { id }) => {
-            console.log(__dirname)
+        resolve: async (_, { id }, context) => {
+            console.log("context", context.body.user);
             const usecase = BoardUseCaseFactory.createBoardUseCase();
             const board = await usecase.find(id);
             return board;

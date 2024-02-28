@@ -3,6 +3,23 @@ import type { UserRepositoryInterface } from "./interface/userRepositoryIf";
 import { prismaContext } from "../database/prismaContext";
 
 export class UserRepository implements UserRepositoryInterface {
+    findById = async(id: number): Promise<User> => {
+        const user = await prismaContext.user.findUnique({
+            where: {
+                id: id
+            },
+            include: {
+                boards: true
+            }
+        })
+        
+        if (!user) {
+            throw new Error("not found user")
+        }
+        
+        return user
+    }
+
     create = async(
         name: string, 
         email: string, 
@@ -19,12 +36,18 @@ export class UserRepository implements UserRepositoryInterface {
         })
     }
 
-    find = async(email: string, password: string): Promise<User> => {
-        return await prismaContext.user.findUnique({
+    findByCredential = async(email: string, password: string): Promise<User> => {
+        const user = await prismaContext.user.findUnique({
             where: {
                 email: email,
                 password: password
             }
         })
+        
+        if (!user) {
+            throw new Error("not found user")
+        }
+        
+        return user
     }
 }

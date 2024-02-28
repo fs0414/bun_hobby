@@ -9,15 +9,38 @@ query {
     name
     email
     password
+    role
+  }
+}
+```
+
+- user get
+```graphql
+query GetUser {
+  user(id: 1) {
+    id
+    name
+    email
+    password
+    role
+    boards {
+      id
+      content
+      user_id
+    }
   }
 }
 ```
 
 - signup
 ```graphql
-mutation Signin {
-  signin(email: "user01@i.com", password: "user01") {
-    token
+mutation Signup {
+  signup(name: "user01", email: "user01@i.com", password: "user01", role: USER) {
+    id
+    name
+    email
+    password
+    role
   }
 }
 ```
@@ -26,9 +49,7 @@ mutation Signin {
 ```graphql
 mutation Signin {
   signin(email: "user01@i.com", password: "user01") {
-    id
-    email
-    password
+    token
   }
 }
 ```
@@ -78,3 +99,28 @@ mutation UpdateBoard {
 }
 ```
 
+- PersonalBankAccount get
+```graphql
+query GetePersonalBankAccount {
+  personalBankAccount(id: 1, user_id: 1) {
+    id
+    account_number
+    balance
+    is_active
+    user_id
+  }
+}
+```
+
+- PersonalBankAccount create
+```graphql
+mutation CreatePersonalBankAccount {
+  createPersonalBankAccount(account_number: "`123456" user_id: 1) {
+    id
+    account_number
+    balance
+    is_active
+    user_id
+  }
+}
+```

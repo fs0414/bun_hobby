@@ -23,7 +23,9 @@ model User {
   following  Follow[]  @relation("following")
   likes      Like[]
   comments   Comment[]
-  bank_accounts BankAccount[]
+  personal_bank_accounts PersonalBankAccount[]
+  SalaryReport_Admin  SalaryReport[] @relation("Admin")
+  SalaryReport_User  SalaryReport[] @relation("User")
 
   @@map("users")
 }
@@ -76,13 +78,26 @@ model Like {
   @@map("likes")
 }
 
-model BankAccount {
+model PersonalBankAccount {
   id       Int      @id @default(autoincrement())
   user_id  Int
-  balance  Float
+  account_number String
+  balance  Int @default(0)
+  is_active Boolean @default(true)
   user     User      @relation(fields: [user_id], references: [id])
 
-  @@map("bank_accounts")
+  @@map("personal_bank_accounts")
+}
+
+model SalaryReport {
+  id       Int      @id @default(autoincrement())
+  admin_id Int
+  user_id  Int
+  salary   Int
+  admin     User      @relation("Admin", fields: [admin_id], references: [id])
+  user     User      @relation("User", fields: [user_id], references: [id])
+
+  @@map("salary_reports")
 }
 
 enum Role {

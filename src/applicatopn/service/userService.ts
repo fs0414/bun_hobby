@@ -9,7 +9,7 @@ export class UserService implements UserServiceInterface {
         const token = jwt.sign(
             { email: email },
             process.env.JWT_SECRET || "",
-            { expiresIn: "1h" }
+            { expiresIn: "1000h" }
         )
         
         return token
