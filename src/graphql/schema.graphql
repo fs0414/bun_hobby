@@ -13,6 +13,7 @@ type Board {
 }
 
 type Mutation {
+  addPayrollToUser(amount: Int!, user_id: Int!): PersonalBankAccount!
   createBoard(content: String!, user_id: Int!): Board!
   createPersonalBankAccount(account_number: String!, balance: Int, is_active: Boolean, user_id: Int!): PersonalBankAccount!
   signin(email: String!, password: String!): AuthPayload!

@@ -124,3 +124,16 @@ mutation CreatePersonalBankAccount {
   }
 }
 ```
+
+- addPayrollToUser
+```graphql
+mutation AddPayrollToUser {
+  addPayrollToUser(amount: 100, user_id: 1) {
+    id
+    account_number
+    balance
+    is_active
+    user_id
+  }
+}
+```

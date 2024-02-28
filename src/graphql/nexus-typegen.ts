@@ -76,6 +76,7 @@ export interface NexusGenFieldTypes {
     user_id: number; // Int!
   }
   Mutation: { // field return type
+    addPayrollToUser: NexusGenRootTypes['PersonalBankAccount']; // PersonalBankAccount!
     createBoard: NexusGenRootTypes['Board']; // Board!
     createPersonalBankAccount: NexusGenRootTypes['PersonalBankAccount']; // PersonalBankAccount!
     signin: NexusGenRootTypes['AuthPayload']; // AuthPayload!
@@ -117,6 +118,7 @@ export interface NexusGenFieldTypeNames {
     user_id: 'Int'
   }
   Mutation: { // field return type name
+    addPayrollToUser: 'PersonalBankAccount'
     createBoard: 'Board'
     createPersonalBankAccount: 'PersonalBankAccount'
     signin: 'AuthPayload'
@@ -150,6 +152,10 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addPayrollToUser: { // args
+      amount: number; // Int!
+      user_id: number; // Int!
+    }
     createBoard: { // args
       content: string; // String!
       user_id: number; // Int!

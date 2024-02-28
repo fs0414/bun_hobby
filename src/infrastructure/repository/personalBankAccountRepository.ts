@@ -16,4 +16,20 @@ export class PersonalBankAccountRepository implements PersonalBankAccountReposit
         });
     }
 
+    async addPayrollToUser(
+        user_id: number,
+        amount: number
+    ): Promise<PersonalBankAccount> {
+        return await prismaContext.personalBankAccount.update({
+            where: {
+                user_id: user_id
+            },
+            data: {
+                balance: {
+                    increment: amount
+                }
+            }
+        });
+    }
+
 }

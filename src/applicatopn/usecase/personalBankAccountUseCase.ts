@@ -16,4 +16,14 @@ export class PersonalBankAccountUseCase implements PersonalBankAccountUseCaseInt
             user_id
         );
     }
+
+    async addPayrollToUser(
+        user_id: number,
+        amount: number
+    ): Promise<PersonalBankAccount> {
+        return await this.personalBankAccountRepository.addPayrollToUser(
+            user_id,
+            amount
+        );
+    }
 }

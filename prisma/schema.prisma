@@ -23,7 +23,7 @@ model User {
   following  Follow[]  @relation("following")
   likes      Like[]
   comments   Comment[]
-  personal_bank_accounts PersonalBankAccount[]
+  personal_bank_accounts PersonalBankAccount?
   SalaryReport_Admin  SalaryReport[] @relation("Admin")
   SalaryReport_User  SalaryReport[] @relation("User")
 
@@ -80,7 +80,7 @@ model Like {
 
 model PersonalBankAccount {
   id       Int      @id @default(autoincrement())
-  user_id  Int
+  user_id  Int @unique
   account_number String
   balance  Int @default(0)
   is_active Boolean @default(true)
