@@ -1,4 +1,4 @@
-import type { PersonalBankAccount } from "@prisma/client";
+import type { PersonalBankAccount, Prisma } from "@prisma/client";
 import { prismaContext } from "../database/prismaContext";
 import type { PersonalBankAccountRepositoryInterface } from "./interface/personalBankAccountRepositoryIf";
 
@@ -18,9 +18,10 @@ export class PersonalBankAccountRepository implements PersonalBankAccountReposit
 
     async addPayrollToUser(
         user_id: number,
-        amount: number
+        amount: number,
+        tx: Prisma.TransactionClient
     ): Promise<PersonalBankAccount> {
-        return await prismaContext.personalBankAccount.update({
+        return await tx.personalBankAccount.update({
             where: {
                 user_id: user_id
             },

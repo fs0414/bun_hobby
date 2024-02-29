@@ -16,7 +16,12 @@ export const AddPayrollToUserMutation = extendType({
                 try {
                     authenticateAdminRole(context.body.user.role);
                     const usecase = PersonalBankAccountUseCaseFactory.createPersonalBankAccountUseCase();
-                    const result = await usecase.addPayrollToUser(user_id, amount);
+                    const adminUserId = context.body.user.id;
+                    const result = await usecase.addPayrollToUser(user_id, amount, adminUserId)
+                        // .then(result => {
+                        //     console.log("result", result)
+                        //     return result;
+                        // })
                     return result;
                 } catch (error: unknown) {
                     throw new Error(error as string);

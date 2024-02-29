@@ -8,6 +8,7 @@ export interface PersonalBankAccountUseCaseInterface {
 
     addPayrollToUser(
         user_id: number,
-        amount: number
+        amount: number,
+        adminUserId: number
     ): Promise<PersonalBankAccount>
 }

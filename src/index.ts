@@ -5,18 +5,18 @@ import express, {
 import cors from "cors";
 import { graphiqlRouter } from "./graphql/adapter/router";
 import { errorHandler } from "./applicatopn/handler/middleware/errorHandler";
+import { authenticateTokenUnless } from "./applicatopn/handler/middleware/authenticateToken";
+import * as Batch from "./applicatopn/batch/index";
 export const app: Application = express();
 const port = 8000;
-
-import { ApolloServer } from "apollo-server-express";
-import { schema } from "./graphql/schema";
-import { authenticateTokenUnless } from "./applicatopn/handler/middleware/authenticateToken";
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(errorHandler);
+// app.use(Batch)
+Batch.payrollReportClaen();
 
 // routes
 app.use("", require("./adapter/rest/index"));

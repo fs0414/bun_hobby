@@ -1,4 +1,4 @@
-import type { PersonalBankAccount } from "@prisma/client";
+import type { PersonalBankAccount, Prisma } from "@prisma/client";
 
 export interface PersonalBankAccountRepositoryInterface {
     create(
@@ -8,6 +8,7 @@ export interface PersonalBankAccountRepositoryInterface {
 
     addPayrollToUser(
         user_id: number,
-        amount: number
+        amount: number,
+        tx: Prisma.TransactionClient
     ): Promise<PersonalBankAccount>
 }

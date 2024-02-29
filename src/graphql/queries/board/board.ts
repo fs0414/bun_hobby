@@ -10,9 +10,11 @@ export const GetBoardQuery = extendType({
             args: {
                 id: nonNull(intArg()),
             },
-            resolve: async (_, { id }, context) => {
-                console.log("context", context.body.user);
+            resolve: async (_, { id }) => {
+                const start = process.hrtime();
                 const usecase = BoardUseCaseFactory.createBoardUseCase();
+                const end = process.hrtime(start);
+                console.log("Execution time (hr): %ds %dms", end[0], end[1] / 1000000);
                 return await usecase.find(id);
             },
         });

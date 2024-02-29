@@ -1,6 +1,7 @@
 import { arg, extendType, nonNull } from "nexus";
 import { Role, User } from "../../types/user";
 import { UserUseCaseFactory } from "../../factory/userFactory";
+import { authenticateAdminRole } from "../../../applicatopn/handler/middleware/authenticateAdminRole";
 
 export const SignupMutation = extendType({
     type: 'Mutation',
@@ -13,7 +14,7 @@ export const SignupMutation = extendType({
           password: nonNull('String'),
           role: nonNull(arg({ type: Role })),
         },
-        resolve: async (_parent, { name, email, password, role }) => {
+        resolve: async (_parent, { name, email, password, role }, context) => {
             try {
                 const usecase = UserUseCaseFactory.createUserUseCase()
                 return await usecase.signup(

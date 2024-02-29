@@ -14,9 +14,9 @@ export const authenticateTokenUnless = async(
     const token = authHeader && authHeader.split(" ")[1];
 
     const operationName = req.body.query.split(" ")[1];
-
     if (operationName === "Signin" || operationName === "Signup") {
         next();
+        return;
     }
 
     if (token == null) 
